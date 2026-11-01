@@ -1,0 +1,652 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Raj Goyani — Security Analyst</title>
+<meta name="description" content="Raj Goyani — Security Analyst (SOC) specializing in SIEM, incident response, detection engineering and cloud security controls. Welland, Ontario, Canada.">
+<meta name="author" content="Raj Goyani">
+<meta name="theme-color" content="#1b1a17">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Raj Goyani — Security Analyst">
+<meta property="og:description" content="SOC analyst: Splunk Enterprise Security, incident response, detection tuning, AWS & Azure security controls. CompTIA Security+ · Splunk Core Certified Power User.">
+<meta property="og:image" content="photo.jpg">
+<meta name="twitter:card" content="summary">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f4f0e6;
+    --card: #fbf8f1;
+    --ink: #1b1a17;
+    --ink-soft: #4a4740;
+    --muted: #7a756b;
+    --rule: #d8d1c2;
+    --accent: #b5361d;
+    --accent-soft: #f3dcd4;
+    --ok: #2f6b3f;
+    --chip: #ece6d8;
+    --shadow: 0 1px 0 rgba(0,0,0,.04), 0 8px 24px -16px rgba(0,0,0,.25);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #121210; --card: #1a1a17; --ink: #ece7dc; --ink-soft: #c3bdb0; --muted: #8f897d;
+      --rule: #2e2d29; --accent: #ff6a4d; --accent-soft: #3a1d16; --ok: #7cc58f; --chip: #24231f;
+      --shadow: 0 1px 0 rgba(255,255,255,.03), 0 8px 24px -16px rgba(0,0,0,.8);
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #121210; --card: #1a1a17; --ink: #ece7dc; --ink-soft: #c3bdb0; --muted: #8f897d;
+    --rule: #2e2d29; --accent: #ff6a4d; --accent-soft: #3a1d16; --ok: #7cc58f; --chip: #24231f;
+    --shadow: 0 1px 0 rgba(255,255,255,.03), 0 8px 24px -16px rgba(0,0,0,.8);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 96px; }
+  body {
+    margin: 0; background: var(--paper); color: var(--ink);
+    font: 16px/1.65 Inter, system-ui, -apple-system, Segoe UI, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; }
+  .mono { font-family: "JetBrains Mono", ui-monospace, Consolas, monospace; }
+  .serif { font-family: Fraunces, Georgia, serif; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 16px; }
+
+  /* ---------- ticker + nav ---------- */
+  .ticker {
+    background: var(--ink); color: var(--paper);
+    font: 600 11px/1 "JetBrains Mono", monospace; letter-spacing: .12em; text-transform: uppercase;
+  }
+  .ticker .wrap { display: flex; justify-content: space-between; gap: 16px; padding-top: 9px; padding-bottom: 9px; }
+  .ticker .right { opacity: .75; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  header.nav {
+    position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--paper) 92%, transparent);
+    backdrop-filter: blur(8px); border-bottom: 1px solid var(--rule);
+  }
+  header.nav .wrap { display: flex; align-items: center; gap: 20px; padding-top: 12px; padding-bottom: 12px; }
+  .brand { font: 700 20px/1.05 Fraunces, serif; text-decoration: none; }
+  .brand small { display: block; font: 600 10px/1.4 "JetBrains Mono", monospace; letter-spacing: .14em; color: var(--accent); text-transform: uppercase; }
+  nav.links { display: flex; gap: 4px; flex-wrap: wrap; margin-left: auto; }
+  nav.links a {
+    font: 500 12px/1 "JetBrains Mono", monospace; text-decoration: none; padding: 8px 10px; border-radius: 6px; color: var(--ink-soft);
+  }
+  nav.links a span { color: var(--muted); margin-right: 4px; }
+  nav.links a:hover, nav.links a.active { background: var(--ink); color: var(--paper); }
+  nav.links a:hover span, nav.links a.active span { color: var(--accent); }
+  .theme-btn {
+    font: 600 11px/1 "JetBrains Mono", monospace; letter-spacing: .08em; text-transform: uppercase;
+    background: transparent; color: var(--ink); border: 1px solid var(--rule); border-radius: 6px; padding: 8px 10px; cursor: pointer;
+  }
+  .theme-btn:hover { border-color: var(--ink); }
+  .menu-btn { display: none; }
+
+  /* ---------- sections ---------- */
+  section { padding: 72px 0; border-bottom: 1px solid var(--rule); }
+  .kicker { font: 600 11px/1.4 "JetBrains Mono", monospace; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin: 0 0 10px; }
+  h2.title { font: 700 clamp(30px, 4vw, 42px)/1.1 Fraunces, serif; margin: 0 0 12px; letter-spacing: -.01em; }
+  .lede { color: var(--ink-soft); max-width: 720px; margin: 0 0 36px; }
+  .card { background: var(--card); border: 1px solid var(--rule); border-radius: 10px; box-shadow: var(--shadow); }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+  .chip { font: 500 11.5px/1 "JetBrains Mono", monospace; background: var(--chip); color: var(--ink-soft); padding: 6px 8px; border-radius: 4px; }
+  .plate-cap { font: 500 10.5px/1.5 "JetBrains Mono", monospace; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+
+  /* ---------- hero ---------- */
+  #home { padding-top: 48px; }
+  .hero { display: grid; grid-template-columns: 300px 1fr; gap: 44px; padding: 32px; }
+  .portrait { position: relative; }
+  .portrait .frame {
+    aspect-ratio: 4/5; border: 1px solid var(--rule); background: var(--chip); padding: 10px; border-radius: 4px;
+  }
+  .portrait .frame > div { width: 100%; height: 100%; position: relative; overflow: hidden; background: linear-gradient(160deg, #2a2925, #121210); }
+  .portrait img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(.15) contrast(1.03); }
+  .portrait .mono-fallback {
+    position: absolute; inset: 0; display: grid; place-items: center; color: #f4f0e6;
+    font: 700 84px/1 Fraunces, serif; letter-spacing: -.02em;
+  }
+  .portrait .plate-cap { margin-top: 8px; }
+  .status {
+    display: inline-flex; align-items: center; gap: 8px; margin-top: 18px;
+    font: 600 11px/1 "JetBrains Mono", monospace; letter-spacing: .06em; color: var(--ok);
+    border: 1px solid currentColor; padding: 7px 10px; border-radius: 999px;
+  }
+  .status::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; animation: pulse 2s infinite; }
+  @keyframes pulse { 50% { opacity: .3; } }
+  .hero h1 { font: 700 clamp(40px, 6vw, 64px)/1 Fraunces, serif; margin: 6px 0 14px; letter-spacing: -.02em; }
+  .hero .role { font-weight: 600; font-size: 19px; line-height: 1.4; margin: 0 0 10px; }
+  .hero .creds { font: 400 12.5px/1.6 "JetBrains Mono", monospace; color: var(--muted); margin: 0 0 20px; }
+  .hero .summary { color: var(--ink-soft); margin: 0 0 22px; }
+  .hero .summary b { color: var(--ink); }
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+  .tag { font: 600 11.5px/1 "JetBrains Mono", monospace; border: 1px solid var(--ink); padding: 7px 9px; border-radius: 3px; }
+  .tag.hot { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .actions { display: flex; flex-wrap: wrap; gap: 10px; }
+  .btn {
+    font: 600 13px/1 Inter, sans-serif; text-decoration: none; padding: 11px 14px; border-radius: 6px;
+    border: 1px solid var(--ink); display: inline-flex; gap: 6px; align-items: center;
+  }
+  .btn.primary { background: var(--ink); color: var(--paper); }
+  .btn:hover { transform: translateY(-1px); }
+
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 20px; }
+  .stat { padding: 20px; }
+  .stat .k { font: 600 10.5px/1.4 "JetBrains Mono", monospace; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); }
+  .stat .v { font: 700 32px/1.1 Fraunces, serif; margin: 8px 0 6px; }
+  .stat p { margin: 0; font-size: 13.5px; color: var(--ink-soft); line-height: 1.5; }
+
+  /* ---------- skills ---------- */
+  .grid2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+  .domain { padding: 24px; }
+  .domain h3 { font: 700 21px/1.25 Fraunces, serif; margin: 6px 0 8px; }
+  .domain p { margin: 0; color: var(--ink-soft); font-size: 14.5px; }
+
+  /* ---------- projects ---------- */
+  .project { display: grid; grid-template-columns: 1fr 1fr; gap: 0; overflow: hidden; margin-bottom: 22px; }
+  .project .diagram { background: #141412; color: #d9d3c6; padding: 22px; display: flex; flex-direction: column; justify-content: space-between; gap: 14px; }
+  .project .diagram .hdr { display: flex; justify-content: space-between; gap: 10px; font: 600 10.5px/1.4 "JetBrains Mono", monospace; letter-spacing: .12em; color: #ff6a4d; }
+  .project pre { margin: 0; font: 400 11.5px/1.45 "JetBrains Mono", monospace; overflow-x: auto; color: #d9d3c6; }
+  .project .diagram .foot { font: 500 10px/1.4 "JetBrains Mono", monospace; letter-spacing: .12em; color: #8f897d; text-transform: uppercase; }
+  .project .body { padding: 26px; }
+  .project h3 { font: 700 23px/1.2 Fraunces, serif; margin: 6px 0 4px; }
+  .project .stack { font: 500 12px/1.5 "JetBrains Mono", monospace; color: var(--muted); margin: 0 0 14px; }
+  ul.points { margin: 0; padding-left: 0; list-style: none; }
+  ul.points li { position: relative; padding-left: 18px; margin: 0 0 9px; color: var(--ink-soft); font-size: 14.5px; }
+  ul.points li::before { content: "▸"; position: absolute; left: 0; color: var(--accent); font-size: 12px; top: 2px; }
+
+  /* ---------- experience ---------- */
+  .timeline { position: relative; padding-left: 28px; }
+  .timeline::before { content: ""; position: absolute; left: 6px; top: 6px; bottom: 6px; width: 2px; background: var(--rule); }
+  .tl-item { position: relative; margin-bottom: 22px; }
+  .tl-item::before { content: ""; position: absolute; left: -28px; top: 26px; width: 14px; height: 14px; border-radius: 50%; background: var(--paper); border: 3px solid var(--accent); }
+  .tl-item .card { padding: 24px; }
+  .tl-head { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: baseline; }
+  .tl-head h3 { font: 700 22px/1.2 Fraunces, serif; margin: 4px 0 2px; }
+  .tl-head .org { font-weight: 600; }
+  .tl-head .loc { font: 500 12px/1.4 "JetBrains Mono", monospace; color: var(--muted); }
+  .tl-item ul.points { margin-top: 14px; }
+
+  /* ---------- certs ---------- */
+  .cert-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .cert { padding: 22px; }
+  .cert h4 { margin: 8px 0 6px; font: 700 18px/1.3 Fraunces, serif; }
+  .cert p { margin: 0; font-size: 14px; color: var(--ink-soft); }
+  .cert .seal { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; background: var(--accent-soft); color: var(--accent); font: 700 13px/1 "JetBrains Mono", monospace; }
+
+  /* ---------- tryhackme ---------- */
+  .thm { display: grid; grid-template-columns: 1.1fr 1fr; gap: 18px; }
+  .thm .panel { padding: 24px; }
+  .thm-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 14px; }
+  .thm-stats div { border: 1px solid var(--rule); border-radius: 8px; padding: 14px; }
+  .thm-stats b { display: block; font: 700 26px/1.1 Fraunces, serif; }
+  .thm-stats span { font: 500 10.5px/1.4 "JetBrains Mono", monospace; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+  .heat { display: grid; grid-template-columns: repeat(26, 1fr); gap: 3px; margin-top: 16px; }
+  .heat i { aspect-ratio: 1; border-radius: 2px; background: var(--chip); }
+  .heat i.l1 { background: color-mix(in srgb, var(--ok) 30%, var(--chip)); }
+  .heat i.l2 { background: color-mix(in srgb, var(--ok) 60%, var(--chip)); }
+  .heat i.l3 { background: var(--ok); }
+  .progress { height: 8px; border-radius: 99px; background: var(--chip); overflow: hidden; margin: 10px 0 4px; }
+  .progress > span { display: block; height: 100%; background: var(--accent); }
+  .rooms { list-style: none; padding: 0; margin: 12px 0 0; }
+  .rooms li { display: flex; justify-content: space-between; gap: 10px; padding: 9px 0; border-bottom: 1px dashed var(--rule); font-size: 14.5px; }
+  .rooms li span { font: 500 11.5px/1.6 "JetBrains Mono", monospace; color: var(--muted); white-space: nowrap; }
+
+  /* ---------- education ---------- */
+  .edu { padding: 24px; }
+  .edu h3 { font: 700 21px/1.25 Fraunces, serif; margin: 6px 0 4px; }
+  .edu p { margin: 0; color: var(--ink-soft); }
+
+  /* ---------- contact ---------- */
+  .contact { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .contact .panel { padding: 26px; }
+  .contact h3 { font: 700 22px/1.2 Fraunces, serif; margin: 4px 0 6px; }
+  .clink { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 14px 0; border-bottom: 1px solid var(--rule); text-decoration: none; }
+  .clink small { display: block; font: 600 10.5px/1.4 "JetBrains Mono", monospace; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+  .clink strong { font-weight: 600; word-break: break-word; }
+  .clink:hover strong { color: var(--accent); }
+  form label { display: block; font: 600 10.5px/1.4 "JetBrains Mono", monospace; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin: 14px 0 6px; }
+  form input, form textarea {
+    width: 100%; font: 15px/1.5 Inter, sans-serif; color: var(--ink); background: var(--paper);
+    border: 1px solid var(--rule); border-radius: 6px; padding: 10px 12px;
+  }
+  form input:focus, form textarea:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+  form button { margin-top: 16px; cursor: pointer; }
+  footer { padding: 28px 0 40px; font: 500 11.5px/1.6 "JetBrains Mono", monospace; color: var(--muted); }
+  footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+
+  .reveal { opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } html { scroll-behavior: auto; } }
+
+  /* ---------- responsive ---------- */
+  @media (max-width: 920px) {
+    .hero { grid-template-columns: 1fr; padding: 22px; gap: 28px; }
+    .portrait { max-width: 280px; }
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .project, .thm, .contact { grid-template-columns: 1fr; }
+    .cert-grid { grid-template-columns: 1fr 1fr; }
+    .menu-btn { display: inline-block; margin-left: auto; }
+    nav.links { display: none; position: absolute; top: 100%; left: 0; right: 0; background: var(--paper); border-bottom: 1px solid var(--rule); padding: 10px 16px; flex-direction: column; }
+    nav.links.open { display: flex; }
+    header.nav .wrap { position: relative; }
+  }
+  @media (max-width: 620px) {
+    section { padding: 52px 0; }
+    .grid2, .cert-grid, .stats { grid-template-columns: 1fr; }
+    .ticker .right { display: none; }
+    .timeline { padding-left: 20px; }
+    .tl-item::before { left: -20px; }
+    .timeline::before { left: 2px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="ticker">
+  <div class="wrap">
+    <span>Raj Goyani</span>
+    <span class="right">SOC · SIEM · Incident Response · CompTIA Security+ · Splunk Power User · TryHackMe Top 4%</span>
+  </div>
+</div>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#home">Raj Goyani<small>Security Analyst · SOC</small></a>
+    <button class="theme-btn menu-btn" id="menuBtn" aria-label="Open menu">Menu</button>
+    <nav class="links" id="navLinks">
+      <a href="#home"><span>01</span>Home</a>
+      <a href="#skills"><span>02</span>Skills</a>
+      <a href="#projects"><span>03</span>Projects</a>
+      <a href="#experience"><span>04</span>Experience</a>
+      <a href="#certs"><span>05</span>Credentials</a>
+      <a href="#contact"><span>06</span>Contact</a>
+    </nav>
+    <button class="theme-btn" id="themeBtn" aria-label="Toggle colour theme">◐ Ink</button>
+  </div>
+</header>
+
+<main>
+
+<!-- ============ HOME ============ -->
+<section id="home">
+  <div class="wrap">
+    <div class="card hero reveal">
+      <div class="portrait">
+        <div class="frame"><div>
+          <img src="photo.jpg" alt="Portrait of Raj Goyani" onerror="this.remove()">
+          <div class="mono-fallback" aria-hidden="true">RG</div>
+        </div></div>
+        <div class="plate-cap">Plate 1.0 // Raj Goyani · Welland, ON</div>
+        <div class="status">Open to Security Analyst / SOC roles · Canada</div>
+      </div>
+
+      <div>
+        <p class="kicker">Security Analyst · SOC &amp; Incident Response · Welland, Ontario, Canada</p>
+        <h1>Raj Goyani</h1>
+        <p class="role">SIEM Engineering · Detection Tuning · Incident Response · Cloud Security Controls</p>
+        <p class="creds">MPS Informatics (Information Security Management), Northeastern University · B.Tech Computer Engineering (Cybersecurity) · CompTIA Security+ · Splunk Core Certified Power User</p>
+        <p class="summary">
+          Security analyst with <b>full-time SOC experience</b> supporting and tuning SIEM (<b>Splunk Enterprise Security</b>),
+          investigating and responding to security incidents, and maintaining incident response playbooks. Experienced with
+          EDR, IDS/NDR, threat simulation, web content filtering, email security, web application firewalls, certificate
+          management, and <b>AWS and Azure</b> security controls. Writes security policies, standards and procedures, and
+          delivers work using Scrum and Kanban with JIRA and Confluence. Reduced false positives by <b>30%</b> through a
+          purple-team exercise. Eligible to work in Canada and able to obtain <b>Reliability Status</b> clearance.
+        </p>
+        <div class="tags">
+          <span class="tag hot">−30% False Positives</span>
+          <span class="tag">CompTIA Security+ (SY0-701)</span>
+          <span class="tag">Splunk Core Certified Power User</span>
+          <span class="tag">TryHackMe Top 4% · Gold League</span>
+          <span class="tag">MITRE ATT&amp;CK</span>
+        </div>
+        <div class="actions">
+          <a class="btn primary" href="Raj_Goyani_Resume.pdf" target="_blank" rel="noopener">↗ View Resume</a>
+          <a class="btn" href="Raj_Goyani_Resume.pdf" download>↓ Download Resume</a>
+          <a class="btn" href="mailto:rajgoyani1214@gmail.com">✉ Email</a>
+          <a class="btn" href="https://www.linkedin.com/in/raj-goyani" target="_blank" rel="noopener">↗ LinkedIn</a>
+          <a class="btn" href="https://tryhackme.com/p/rajbgoyani" target="_blank" rel="noopener">↗ TryHackMe</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="card stat reveal"><div class="k">SOC Operations</div><div class="v">1 yr</div><p>Full-time SOC Analyst at 7HillsCyberWall — triage, investigation and escalation in Splunk.</p></div>
+      <div class="card stat reveal"><div class="k">Detection Tuning</div><div class="v">−30%</div><p>False positives cut via purple-team TTP simulation mapped to MITRE ATT&amp;CK.</p></div>
+      <div class="card stat reveal"><div class="k">TryHackMe</div><div class="v">Top 4%</div><p>Gold highest league · capability score 51 · 840 events in the last year.</p></div>
+      <div class="card stat reveal"><div class="k">Certified</div><div class="v">2 certs</div><p>CompTIA Security+ (SY0-701) and Splunk Core Certified Power User.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SKILLS ============ -->
+<section id="skills">
+  <div class="wrap">
+    <p class="kicker">Section 02 // Technical Capabilities</p>
+    <h2 class="title">Core Security Domains</h2>
+    <p class="lede">Detection, response, controls and governance — the full defensive loop from log ingestion to written policy.</p>
+
+    <div class="grid2">
+      <div class="card domain reveal">
+        <p class="kicker">Domain 01 // Visibility &amp; Response</p>
+        <h3>Security Visibility &amp; Incident Response</h3>
+        <p>SIEM operations and use-case tuning, alert triage, incident investigation across the full IR lifecycle, and CSIRT playbook maintenance.</p>
+        <div class="chips">
+          <span class="chip">Splunk Enterprise Security</span><span class="chip">Microsoft Sentinel</span><span class="chip">Wazuh</span>
+          <span class="chip">EDR</span><span class="chip">IDS/IPS · NDR</span><span class="chip">SOAR (TheHive, Cortex)</span>
+          <span class="chip">MISP</span><span class="chip">Suricata</span><span class="chip">Wireshark</span><span class="chip">MITRE ATT&amp;CK</span>
+          <span class="chip">Threat Simulation</span><span class="chip">Log Analysis</span>
+        </div>
+      </div>
+      <div class="card domain reveal">
+        <p class="kicker">Domain 02 // Controls &amp; Cloud</p>
+        <h3>Security Controls &amp; Cloud</h3>
+        <p>Perimeter and content controls, identity-driven access, and native cloud security on AWS and Azure.</p>
+        <div class="chips">
+          <span class="chip">pfSense</span><span class="chip">OPNsense</span><span class="chip">Web Application Firewall</span>
+          <span class="chip">Squid Web Filtering</span><span class="chip">Email Security</span><span class="chip">Certificate Management</span>
+          <span class="chip">AWS &amp; Azure Controls</span><span class="chip">Microsoft Defender</span><span class="chip">Entra ID Conditional Access</span>
+          <span class="chip">Network Segmentation</span><span class="chip">TCP/IP</span>
+        </div>
+      </div>
+      <div class="card domain reveal">
+        <p class="kicker">Domain 03 // Governance &amp; Delivery</p>
+        <h3>Governance, Risk &amp; Delivery</h3>
+        <p>Policies, standards and procedures aligned to recognised frameworks; risk assessments and audit support delivered through agile practice.</p>
+        <div class="chips">
+          <span class="chip">NIST</span><span class="chip">ISO 27001/27002</span><span class="chip">Risk Assessments</span>
+          <span class="chip">Audit Support</span><span class="chip">Disaster Recovery</span><span class="chip">Capacity Planning</span>
+          <span class="chip">Scrum</span><span class="chip">Kanban</span><span class="chip">JIRA</span><span class="chip">Confluence</span>
+        </div>
+      </div>
+      <div class="card domain reveal">
+        <p class="kicker">Domain 04 // Automation</p>
+        <h3>Scripting &amp; Tooling</h3>
+        <p>Automating repetitive SOC workflows and integrating APIs, including LLM-assisted alert triage.</p>
+        <div class="chips">
+          <span class="chip">Python</span><span class="chip">PowerShell</span><span class="chip">Bash</span>
+          <span class="chip">API Integration</span><span class="chip">Google Gemini API</span><span class="chip">Kali Linux</span><span class="chip">VirtualBox</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROJECTS ============ -->
+<section id="projects">
+  <div class="wrap">
+    <p class="kicker">Section 03 // Lab Engineering</p>
+    <h2 class="title">Security Engineering Projects</h2>
+    <p class="lede">Hands-on enterprise simulations built end-to-end: segmentation, telemetry, detection and automated response.</p>
+
+    <article class="card project reveal">
+      <div class="diagram">
+        <div class="hdr"><span>SOC-SIM // AI-ASSISTED TRIAGE</span><span>PLATE 3.1</span></div>
+<pre>[ HR Subnet ]      [ IT Subnet ]
+  Ubuntu VMs         Ubuntu VMs
+  scripted traffic   scripted traffic
+       │                  │
+       └───────┬──────────┘
+               ▼
+┌──────────────────────────────┐
+│ pfSense  · rules · routing   │
+│          · DHCP · segments   │
+│ Squid    · transparent proxy │
+│          · dept web policy   │
+└──────────────┬───────────────┘
+               ▼  firewall logs
+┌──────────────────────────────┐
+│ Splunk Enterprise            │
+│ real-time ingest · monitoring│
+└──────────────┬───────────────┘
+               ▼  blocked events
+┌──────────────────────────────┐
+│ Python + Gemini API          │
+│ first-pass triage verdict    │
+│ ──► analyst review queue     │
+└──────────────────────────────┘</pre>
+        <div class="foot">Arch plate // VirtualBox · pfSense · Squid · Splunk · Gemini</div>
+      </div>
+      <div class="body">
+        <p class="kicker">Home Lab · SOC Automation</p>
+        <h3>Cybersecurity Home Lab: SOC Simulation with AI-Assisted Triage</h3>
+        <p class="stack">VirtualBox · pfSense · Squid · Splunk Enterprise · Python · Google Gemini API</p>
+        <ul class="points">
+          <li>Deployed a segmented multi-subnet enterprise network in VirtualBox with pfSense firewall rules, routing, DHCP, and a Squid transparent proxy enforcing department-level web-access policy.</li>
+          <li>Deployed Ubuntu VMs simulating HR and IT departments with scripted traffic generation, and configured Splunk Enterprise for real-time firewall log ingestion and security-event monitoring.</li>
+          <li>Developed a Python pipeline integrating the Google Gemini API to generate first-pass triage verdicts on blocked-traffic events for analyst review, automating a repetitive SOC workflow.</li>
+        </ul>
+        <div class="chips"><span class="chip">Network Segmentation</span><span class="chip">Web Filtering</span><span class="chip">SIEM Ingestion</span><span class="chip">LLM Triage</span></div>
+      </div>
+    </article>
+
+    <article class="card project reveal">
+      <div class="diagram">
+        <div class="hdr"><span>OPNSENSE + OPEN-SOURCE SOAR</span><span>PLATE 3.2</span></div>
+<pre>[ Kali Linux ] ── attack simulation
+       │
+       ▼
+┌──────────────────────────────┐
+│ OPNsense (CARP HA pair)      │
+│ · Suricata IDS/IPS           │
+│ · Squid web-proxy filtering  │
+│ · Multi-WAN failover         │
+└──────────────┬───────────────┘
+               ▼
+┌──────────────────────────────┐
+│ Wazuh agents ─► Wazuh mgr    │
+└──────────────┬───────────────┘
+               ▼  alert → case
+┌──────────────────────────────┐
+│ TheHive ◄─► Cortex ◄─► MISP  │
+│ case mgmt · analyzers · IOCs │
+└──────────────────────────────┘</pre>
+        <div class="foot">Arch plate // OPNsense · Suricata · Wazuh · TheHive · Cortex · MISP</div>
+      </div>
+      <div class="body">
+        <p class="kicker">Network Defence · SOAR</p>
+        <h3>Advanced Network Security Lab: OPNsense &amp; SIEM Integration</h3>
+        <p class="stack">OPNsense · Suricata · Wazuh · TheHive · Cortex · MISP · Kali Linux</p>
+        <ul class="points">
+          <li>Implemented and troubleshot OPNsense with Suricata IDS/IPS, Squid web-proxy filtering, CARP high availability, and multi-WAN failover for network redundancy.</li>
+          <li>Deployed Wazuh endpoint agents and integrated Wazuh with TheHive, Cortex, and MISP as an open-source SOAR stack for automated alert-to-case creation and IOC enrichment.</li>
+          <li>Tested cyber defence controls with Kali Linux attack simulations, validating detection, correlation, and response workflows end-to-end.</li>
+        </ul>
+        <div class="chips"><span class="chip">High Availability</span><span class="chip">IDS/IPS</span><span class="chip">SOAR</span><span class="chip">Threat Intel Enrichment</span></div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============ EXPERIENCE ============ -->
+<section id="experience">
+  <div class="wrap">
+    <p class="kicker">Section 04 // Career &amp; Education</p>
+    <h2 class="title">Professional Experience</h2>
+    <p class="lede">Frontline SOC operations, followed by graduate study in information security management in Canada.</p>
+
+    <div class="timeline">
+      <div class="tl-item reveal">
+        <div class="card">
+          <p class="kicker">May 2023 – May 2024 · Full-Time</p>
+          <div class="tl-head">
+            <div><h3>SOC Analyst</h3><div class="org">7HillsCyberWall</div></div>
+            <div class="loc">Vadodara, India</div>
+          </div>
+          <ul class="points">
+            <li>Reviewed and interpreted security alerts in Splunk, correlating firewall, endpoint, and IDS/IPS logs to diagnose true-positive incidents and escalate them for containment.</li>
+            <li>Analyzed packet-level traffic in Wireshark and Suricata signature alerts to determine attack vector, cause, and impact, extract indicators of compromise (IOCs), and reconstruct incident timelines.</li>
+            <li>Conducted vulnerability assessments and basic penetration testing across network and endpoint assets using Kali Linux and OPNsense, identifying misconfigurations and recommending mitigations.</li>
+            <li>Documented incidents with root cause analysis, impact, and corrective actions, and updated SOC response playbooks based on observed attack patterns.</li>
+            <li>Supported purple-team exercises simulating adversary TTPs mapped to MITRE ATT&amp;CK to validate detection coverage and tune SIEM correlation rules, <b>reducing false positives by 30%</b>.</li>
+          </ul>
+          <div class="chips"><span class="chip">Splunk</span><span class="chip">Wireshark</span><span class="chip">Suricata</span><span class="chip">IOC Extraction</span><span class="chip">RCA &amp; Playbooks</span><span class="chip">Purple Teaming</span></div>
+        </div>
+      </div>
+
+      <div class="tl-item reveal">
+        <div class="card edu">
+          <p class="kicker">Sep 2024 – Mar 2026</p>
+          <div class="tl-head">
+            <div><h3>Northeastern University</h3><p>Master of Professional Studies, Informatics — Information Security Management</p></div>
+            <div class="loc">Toronto, ON</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item reveal">
+        <div class="card edu">
+          <p class="kicker">Sep 2020 – Jun 2024</p>
+          <div class="tl-head">
+            <div><h3>Parul University</h3><p>B.Tech, Computer Engineering — Cybersecurity</p></div>
+            <div class="loc">Vadodara, India</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CREDENTIALS + THM ============ -->
+<section id="certs">
+  <div class="wrap">
+    <p class="kicker">Section 05 // Certifications, Training &amp; Practice</p>
+    <h2 class="title">Credentials &amp; Continuous Practice</h2>
+    <p class="lede">Industry certifications backed by structured training paths and consistent hands-on practice.</p>
+
+    <div class="cert-grid">
+      <div class="card cert reveal"><div class="seal">S+</div><h4>CompTIA Security+</h4><p>SY0-701 · Core security operations, threats, architecture and governance.</p></div>
+      <div class="card cert reveal"><div class="seal">SPL</div><h4>Splunk Core Certified Power User</h4><p>SPL searching, field extraction, knowledge objects, data models and reporting.</p></div>
+      <div class="card cert reveal"><div class="seal">TR</div><h4>Training</h4><p>TryHackMe SOC Level 1 Path · LinkedIn Learning SOC Analyst Path · Purple Academy: Ransomware TTPs.</p></div>
+    </div>
+
+    <div class="thm" style="margin-top:18px">
+      <div class="card panel reveal">
+        <p class="kicker">TryHackMe // @rajbgoyani · Canada · since Oct 2024</p>
+        <h3 class="serif" style="font-size:24px;margin:4px 0 0">Hands-On Practice Profile</h3>
+        <div class="thm-stats">
+          <div><b>Top 4%</b><span>Global ranking</span></div>
+          <div><b>Gold</b><span>Highest league</span></div>
+          <div><b>51</b><span>Capability score</span></div>
+          <div><b>840</b><span>Events · last 12 months</span></div>
+        </div>
+        <div class="heat" id="heat" aria-label="Activity illustration"></div>
+        <div class="plate-cap" style="margin-top:8px">Plate 5.1 // Yearly activity (illustrative) · highest streak 9 days</div>
+      </div>
+
+      <div class="card panel reveal">
+        <p class="kicker">Learning Path</p>
+        <h3 class="serif" style="font-size:22px;margin:4px 0 0">SOC Level 1 — Enrolled</h3>
+        <ul class="rooms">
+          <li>Junior Security Analyst Intro <span>Easy · 15 min</span></li>
+          <li>Pyramid of Pain <span>Easy · 30 min</span></li>
+          <li>Cyber Kill Chain <span>Easy · 45 min</span></li>
+        </ul>
+        <p class="kicker" style="margin-top:20px">Badges</p>
+        <div class="chips" style="margin-top:0">
+          <span class="chip">Packet Master</span><span class="chip">Skilled Navigator</span><span class="chip">The Course Awakens</span>
+          <span class="chip">Friday Fixer</span><span class="chip">3 Day Streak</span>
+        </div>
+        <p class="kicker" style="margin-top:20px">Top Tools</p>
+        <div class="chips" style="margin-top:0">
+          <span class="chip">Splunk</span><span class="chip">Wireshark</span><span class="chip">Snort</span><span class="chip">PhishTool</span>
+          <span class="chip">URLScan.io</span><span class="chip">Cuckoo Sandbox</span><span class="chip">Linux</span><span class="chip">Web</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section id="contact">
+  <div class="wrap">
+    <p class="kicker">Section 06 // Direct Channels</p>
+    <h2 class="title">Get in Touch</h2>
+    <p class="lede">Available for Security Analyst, SOC and Incident Response roles across Canada. Eligible to work in Canada; able to obtain Reliability Status clearance.</p>
+
+    <div class="contact">
+      <div class="card panel reveal">
+        <p class="kicker">Verified Coordinates</p>
+        <h3>Direct Links</h3>
+        <a class="clink" href="mailto:rajgoyani1214@gmail.com"><span><small>Primary Email</small><strong>rajgoyani1214@gmail.com</strong></span><span>↗</span></a>
+        <a class="clink" href="tel:+19053488599"><span><small>Telephone (Canada)</small><strong>+1 (905) 348-8599</strong></span><span>↗</span></a>
+        <a class="clink" href="https://www.linkedin.com/in/raj-goyani" target="_blank" rel="noopener"><span><small>LinkedIn</small><strong>linkedin.com/in/raj-goyani</strong></span><span>↗</span></a>
+        <a class="clink" href="https://tryhackme.com/p/rajbgoyani" target="_blank" rel="noopener"><span><small>TryHackMe</small><strong>tryhackme.com/p/rajbgoyani</strong></span><span>↗</span></a>
+        <a class="clink" href="Raj_Goyani_Resume.pdf" target="_blank" rel="noopener"><span><small>Curriculum Vitae (PDF)</small><strong>Raj_Goyani_Resume.pdf</strong></span><span>↗</span></a>
+        <div class="plate-cap" style="margin-top:14px">Based in Welland, Ontario, Canada</div>
+      </div>
+
+      <div class="card panel reveal">
+        <p class="kicker">Direct Mail Dispatch</p>
+        <h3>Send a Message</h3>
+        <form id="mailForm">
+          <label for="fName">Name *</label><input id="fName" required>
+          <label for="fEmail">Email *</label><input id="fEmail" type="email" required>
+          <label for="fSubject">Subject *</label><input id="fSubject" required>
+          <label for="fMsg">Message *</label><textarea id="fMsg" rows="5" required></textarea>
+          <button class="btn primary" type="submit">✉ Compose &amp; Send</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="yr"></span> Raj Goyani · Security Analyst</span>
+    <span>SIEM · Detection · Response · Governance</span>
+  </div>
+</footer>
+
+<script>
+  // Theme toggle (remembered per browser)
+  const root = document.documentElement, themeBtn = document.getElementById('themeBtn');
+  try { const t = localStorage.getItem('rg-theme'); if (t) root.dataset.theme = t; } catch (e) {}
+  const isDark = () => root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+  const label = () => themeBtn.textContent = isDark() ? '◑ Paper' : '◐ Ink';
+  label();
+  themeBtn.onclick = () => {
+    root.dataset.theme = isDark() ? 'light' : 'dark'; label();
+    try { localStorage.setItem('rg-theme', root.dataset.theme); } catch (e) {}
+  };
+
+  // Mobile menu
+  const navLinks = document.getElementById('navLinks');
+  document.getElementById('menuBtn').onclick = () => navLinks.classList.toggle('open');
+  navLinks.querySelectorAll('a').forEach(a => a.onclick = () => navLinks.classList.remove('open'));
+
+  // Active nav link on scroll
+  const links = [...navLinks.querySelectorAll('a')];
+  const spy = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + e.target.id));
+  }), { rootMargin: '-45% 0px -50% 0px' });
+  document.querySelectorAll('main section').forEach(s => spy.observe(s));
+
+  // Reveal on scroll
+  const rev = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); rev.unobserve(e.target); } }), { threshold: .12 });
+  document.querySelectorAll('.reveal').forEach(el => rev.observe(el));
+
+  // Activity heat strip (decorative)
+  const heat = document.getElementById('heat');
+  for (let i = 0; i < 104; i++) {
+    const r = Math.sin(i * 12.9898) * 43758.5453 % 1, v = Math.abs(r);
+    const c = document.createElement('i');
+    c.className = v > .82 ? 'l3' : v > .6 ? 'l2' : v > .35 ? 'l1' : '';
+    heat.appendChild(c);
+  }
+
+  // Contact form -> opens the visitor's mail client
+  document.getElementById('mailForm').onsubmit = e => {
+    e.preventDefault();
+    const v = id => document.getElementById(id).value.trim();
+    const body = `${v('fMsg')}\n\n— ${v('fName')} (${v('fEmail')})`;
+    location.href = `mailto:rajgoyani1214@gmail.com?subject=${encodeURIComponent(v('fSubject'))}&body=${encodeURIComponent(body)}`;
+  };
+
+  document.getElementById('yr').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
